@@ -1,0 +1,72 @@
+{% extends 'index.html' %}
+{% block content %}
+<p>
+{% if user.is_authenticated %}
+    <div class="container " >
+        <div class="row">
+        <form method="post" action="/add-todo/">
+                {% csrf_token %}
+                <div class="col-lg-5 shadow p-2 mx-auto p-0 mt-8">
+                    <div class="alert alert-success"><h3>Add TODO Here</h3></div>
+                    {{ form.as_p }}
+                    <input class="btn btn-info" type="submit" value="ADD">
+                </div>
+
+
+            </form>
+        </div>
+        {% if todos|length == 0 %}
+            <div>
+                <br>
+                <div class="alert alert-info col-lg-4 shadow mx-auto p-0 pt-8"><h2>No TODO items</h2></div>
+            </div>
+        {% else %}
+            <div class="col-lg-10 shadow p-2 mx-auto p-0 mt-8">
+            <div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Title</th>
+                            <th>Status</th>
+                            <th>Priority</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    {% for todo in todos %}
+                            <tr>
+                            <td>{{forloop.counter}}</td>
+                            <td>{{todo.title}}</td>
+                            <td>{{todo.status}}</td>
+                            <td>{{todo.priority}}</td>
+                            <td><a href="delete-todo/{{todo.id}}" class="btn btn-danger">Delete</a></td>
+                            </tr>
+                    {% endfor %}
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        {% endif %}
+
+
+    </div>
+{% else %}
+    <div class="col-lg-5 shadow p-2 mx-auto p-0 mt-8">
+        <div color="green"><h2 >What you can do on this site </h2></div><br><br>
+
+        <h4> It's a list of tasks you need to complete, or things that you want to do.<br>
+            Most typically, they're organised in order of priority. <br>
+            Traditionally, they're written on a piece of paper or post it notes and acts as a memory aid.</h4>
+
+    </div>
+<div class="col-lg-5 shadow p-2 mx-auto p-0 mt-8" ><a href="/login" class="btn btn-success"> ADD TODO</a></div>
+{% endif %}
+
+
+
+</p>
+{% endblock %}

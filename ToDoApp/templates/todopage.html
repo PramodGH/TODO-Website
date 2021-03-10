@@ -1,0 +1,32 @@
+{% extends 'index.html' %}
+{% block content %}
+<p>
+<div class="container " >
+    <div class="row">
+    <form method="post" action="/add-todo/">
+            {% csrf_token %}
+            <div class="col-lg-5 shadow p-2 mx-auto p-0 mt-8">
+                <div class="alert alert-success"><h3>Add TODO Here</h3></div>
+                {{ form.as_p }}
+                <input class="btn btn-info" type="submit" value="ADD">
+            </div>
+
+
+        </form>
+    </div>
+    <div class="col-lg-5 shadow p-2 mx-auto p-0 mt-8">
+        <div>
+            <p>
+                Here todo list will be shown <br>
+                here it is
+            </p>
+        </div>
+    </div>
+
+
+</div>
+
+
+
+</p>
+{% endblock %}

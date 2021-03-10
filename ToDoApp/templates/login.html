@@ -1,0 +1,18 @@
+{% extends 'index.html' %}
+{% block content %}
+<p>
+
+    <form method="post" action="/login/">
+        {% csrf_token %}
+        <div class="col-lg-5 shadow p-2 mx-auto p-0 mt-8">
+            <div class="alert alert-success"><h3>Enter Login Details</h3></div>
+            {{ form.as_p }}
+            <div> Don't have an account ? <a href="/signup">Create Account</a></div>
+            <input class="btn btn-info" type="submit" value="Login">
+
+        </div>
+
+
+    </form>
+</p>
+{% endblock %}
